@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import CTASection from "./ui/CTASection";
-import JobCard from "./ui/careerui/JobCard";
-import BenefitCard from "./ui/careerui/BenefitCard";
-import StepCard from "./ui/careerui/StepCard";
-import WhatsAppButton from "./ui/WhatsAppButton";
+import Navbar from "../../Navbar";
+import Footer from "../../Footer";
+import CTASection from "../CTASection";
+import JobCard from "./JobCard";
+import BenefitCard from "./BenefitCard";
+import StepCard from "./StepCard";
+import WhatsAppButton from "../WhatsAppButton";
 
 export default function Career() {
   const jobOpenings = [
@@ -51,20 +51,6 @@ export default function Career() {
         "Client relationship management",
         "Bachelor's degree preferred"
       ]
-    },
-    {
-      title: "VIP Protection Officer",
-      type: "Full-time",
-      location: "Various Locations",
-      experience: "3-7 years",
-      description: "Provide personal security for high-profile individuals. Discreet and professional protection services.",
-      requirements: [
-        "VIP protection experience",
-        "Advanced security training",
-        "Discretion and professionalism",
-        "Travel flexibility",
-        "Advanced driving skills"
-      ]
     }
   ];
 
@@ -85,14 +71,30 @@ export default function Career() {
     { step: "5", title: "Job Placement", description: "Begin your career with Big Boss Security" }
   ];
 
+  const googleFormUrl = "https://forms.gle/exH9EEToyTqWjbKx9";
+
   return (
     <div className="bg-gray-950 text-white font-sans">
       <Navbar />
 
-      <section className="pt-32 pb-20 bg-gray-900 text-center">
-        <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Join Our Team</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+      <section className="relative h-64 md:h-80 flex items-center justify-center overflow-hidden pt-16 w-full">
+        {/* Section-only Background Image */}
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2GuZMmNZGXOpb95Pw1ZZ9yjsyFzNf1nDudA&s"
+          alt="Career background"
+          className="absolute inset-0 w-full h-full object-cover object-center z-0"
+          style={{ pointerEvents: "none" }}
+        />
+        {/* Overlay for readability and blur */}
+        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.10)", backdropFilter: "blur(4px)" }} />
+        {/* Bottom gradient for smooth transition */}
+        <div className="absolute bottom-0 left-0 w-full h-8 z-10" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #111827 100%)" }} />
+        {/* Foreground Content */}
+        <div className="relative z-20 text-center max-w-2xl mx-auto px-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.85)' }}>
+            Join Our Team
+          </h1>
+          <p className="text-lg md:text-xl text-white font-medium" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.85)' }}>
             Build a rewarding career in security with Big Boss Security.
           </p>
         </div>
@@ -106,7 +108,7 @@ export default function Career() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {jobOpenings.map((job, i) => (
-              <JobCard key={i} {...job} />
+              <JobCard key={i} {...job} formUrl={googleFormUrl} />
             ))}
           </div>
         </div>
@@ -144,7 +146,7 @@ export default function Career() {
         heading="Ready to Join Our Team?"
         description="Start your career in security with Big Boss Security today"
         primaryText="Apply Now"
-        primaryLink="/contact"
+        primaryLink={googleFormUrl}
         secondaryText="Learn About Us"
         secondaryLink="/about"
       />

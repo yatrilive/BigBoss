@@ -13,6 +13,9 @@ export default function CTASection({
   className = "",
   children
 }) {
+  // Helper to check if a link is external
+  const isExternal = (url) => url && (url.startsWith("http://") || url.startsWith("https://"));
+
   return (
     <section className={`py-20 bg-gray-800 ${className}`}>
       <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -24,9 +27,15 @@ export default function CTASection({
         )}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
           {primaryText && primaryLink && (
-            <Link to={primaryLink} className={primaryButtonClass}>
-              {primaryText}
-            </Link>
+            isExternal(primaryLink) ? (
+              <a href={primaryLink} target="_blank" rel="noopener noreferrer" className={primaryButtonClass}>
+                {primaryText}
+              </a>
+            ) : (
+              <Link to={primaryLink} className={primaryButtonClass}>
+                {primaryText}
+              </Link>
+            )
           )}
           {secondaryText && secondaryLink && (
             <Link to={secondaryLink} className={secondaryButtonClass}>
